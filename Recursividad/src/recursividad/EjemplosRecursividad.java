@@ -12,24 +12,31 @@ public class EjemplosRecursividad {
 
 		
 		System.out.println("Numero entero positivo para calcular su factorial: ");
-		int numero = teclado.nextInt(); System.out.println("Factorial: " +
-		factorial(numero));
+		int numero = teclado.nextInt(); 
+		System.out.println("Factorial: " + factorial(numero));
 		
 		
-		System.out.println("Cuantos números quieres para la sucesión de Fibonacci: "
-		); long fibNumero = teclado.nextLong();
-		System.out.println("Serie de Fibonacci:\n"); sucesionFibonacci(fibNumero);
+		System.out.println("Cuantos números quieres para la sucesión de Fibonacci: "); 
+		long fibNumero = teclado.nextLong();
+		System.out.println("Serie de Fibonacci:\n"); 
+		sucesionFibonacci(fibNumero);
 		
-		//System.out.printf("Llamadas a fibonacci(): %,d\n" , cont);
+		System.out.printf("Llamadas a fibonacci(): %,d\n" , cont);
 		 
-		
+		cont = 0;
 		System.out.println("Número sobre el que consultar si es primo: ");
 		long priNumero = teclado.nextLong();
 		System.out.println(esPrimo(priNumero, 2) ? "SI es primo" : "NO es primo");
 		System.out.println("Contador: " + cont);
+		
 		cont=0;
 		System.out.println(esPrimo2(priNumero, 2) ? "*SI es primo" : "*NO es primo");
 		System.out.println("Contador: " + cont);
+		
+		System.out.println("Número para invertirlo: ");
+		 numero = teclado.nextInt();
+		 numero = invertirNum(numero, String.valueOf(numero).length() -1);
+		 System.out.println(numero);
 
 		teclado.close();
 
@@ -38,11 +45,14 @@ public class EjemplosRecursividad {
 	// Función recursiva que calcula el factorial de un número entero. 
 
 	static long factorial(int n) {
-		// System.out.println("** Lamada a función con n=" + n);
+		
 		if (n == 0)
+
 			return 1;
-		else
+		else {
+			System.out.printf("%d * factorial(%d)\n",n,n-1);
 			return n * factorial(n - 1);
+	}
 	}
 
 	// Esta sería una versión no recursiva para el cálculo del factorial
@@ -92,7 +102,7 @@ public class EjemplosRecursividad {
 	static void sucesionFibonacci(long n) {
 
 		for (int i = 0; i < n; i++) {
-			System.out.println(fibonacci(i));
+			System.out.printf("Fonbonaci de %d: %d\n",i, fibonacci(i));
 		}
 	}
 
@@ -135,6 +145,25 @@ public class EjemplosRecursividad {
 			}
 		}
 	}
+	
+	
+	// Imviertre un número.
+	// pos es el número de digitos del número menos 1
+	public static int invertirNum(int num,int pos){
+		
+		// 254 = 400 + 50 + 4 = 4 * (10^2) + 5 * (10^1) + 10 = 4 * (10^pos) + 5 * (10^pos-1) + 4
+		
+		        
+        //Si es menor que 10 devuelvo el numero (el ultimo numero)
+        if(num < 10){
+            return num; 
+        }else{
+            //Cojo el modulo del numero y lo multiplico por la potencia (4 * 100) por ejemplo
+        	System.out.printf("(%d %s 10) * (int) Math.pow(10, %d) + (invertirNum(%d / 10, %d - 1))\n", num,"%",pos,num,pos);
+            return (num % 10) * (int) Math.pow(10, pos) + (invertirNum(num/10, pos-1));
+        }
+         
+    }
 	
 	
 
